@@ -20,6 +20,7 @@ function Item({text}) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
+        
         {text}
       </div>
       <div className={`absolute left-0 bottom-0 h-1 bg-[#E03C31] ${borderStyle} transition-all duration-500`}></div>

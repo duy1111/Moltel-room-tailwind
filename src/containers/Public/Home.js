@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Header from "./Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
 function Home() {
+    
     return ( 
     <div className="h-screen w-screen ">
         <Header/>

@@ -3,10 +3,10 @@ import logo from "../../assets/Logo-removebg-preview.png";
 import banner from "../../assets/bannerLogin.png";
 import icons from "../../utils/icons";
 import { Button, InputForm } from "../../components";
-import { useLocation } from "react-router-dom";
-
-import * as actions from '../../store/actions/index';
-import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import * as actions from "../../store/actions/index";
+import { useDispatch, useSelector } from "react-redux";
 let {
   AiOutlineClose,
   FiUser,
@@ -15,22 +15,87 @@ let {
   AiFillGoogleCircle,
 } = icons;
 export default function Login({}) {
-  let location = useLocation()
-  let dispatch = useDispatch()
+  let location = useLocation();
+  const navigate = useNavigate()
+  let dispatch = useDispatch();
   const [showModal, setShowModal] = React.useState(true);
   let [isRegister, setIsRegister] = React.useState(location.state?.flag);
+  const [invalidFields, setInvalidFields] = useState([]);
+  const {isLoggedIn,msg,update} = useSelector(state => state.auth)
   const [payload, setPayload] = useState({
-    phone:'',
-    name:'',
-    password:''
-  })
-  let handleSubmit = async() => {
-    console.log('check payload',payload)
-    dispatch(actions.register(payload))
-  }
+    phone: "",
+    name: "",
+    password: "",
+  });
+  let handleSubmit = async () => {
+    
+    let finalPayload = isRegister ? payload : {
+      phone: payload.phone,
+      password: payload.password
+    }
+    let invalids = validate(finalPayload);
+    if(invalids === 0){
+
+      isRegister === true ? dispatch(actions.register(payload)) : dispatch(actions.login(payload))
+    }
+    console.log(invalids);
+
+    //setShowModal(false)
+  };
+
+  let handleHiddenModal = () => {
+    setShowModal(false);
+  };
+  console.log(invalidFields);
+  const validate = (payload) => {
+    let invalids = 0
+    let fields = Object.entries(payload)
+    fields.forEach(item => {
+        if (item[1] === '') {
+            setInvalidFields(prev => [...prev, {
+                name: item[0],
+                message: 'Bạn không được bỏ trống trường này.'
+            }])
+            invalids++
+        }
+    })
+    fields.forEach(item => {
+        switch (item[0]) {
+            case 'password':
+                if (item[1].length < 6) {
+                    setInvalidFields(prev => [...prev, {
+                        name: item[0],
+                        message: 'Mật khẩu phải có tối thiểu 6 kí tự.'
+                    }])
+                    invalids++
+                }
+                break;
+            case 'phone':
+                if (!+item[1]) {
+                    setInvalidFields(prev => [...prev, {
+                        name: item[0],
+                        message: 'Số điện thoại không hợp lệ.'
+                    }])
+                    invalids++
+                }
+                break
+
+            default:
+                break;
+        }
+    })
+    return invalids
+}
   useEffect(() => {
-    setIsRegister(location.state?.flag)
-  },[location.state?.flag])
+    setIsRegister(location.state?.flag);
+  }, [location.state?.flag]);
+  useEffect(() => {
+    Swal.fire('Oops !',msg,'error')
+  },[msg,update])
+  useEffect(() => {
+    console.log('check isLoggedIn',isLoggedIn.isLoggedIn)
+    isLoggedIn.isLoggedIn === true && navigate('/')
+  },[isLoggedIn.isLoggedIn])
   return (
     <>
       {showModal ? (
@@ -40,7 +105,7 @@ export default function Login({}) {
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none h-full">
                 <div className="relative  flex w-1100  ">
-                  <div className="flex flex-col w-[400px] h-[550px] bg-secondary3 rounded-l-lg">
+                  <div className="flex flex-col w-[400px] h-[675px] bg-secondary3 rounded-l-lg">
                     <img
                       src={logo}
                       alt="logo"
@@ -53,7 +118,10 @@ export default function Login({}) {
                     />
                   </div>
                   <div className="flex flex-col h-[100%] w-[500px] p-[32px]">
-                    <div className=" absolute flex justify-end items-center text-2xl font-semibold top-[12px] right-[212px]">
+                    <div
+                      className=" absolute flex justify-end items-center text-2xl font-semibold top-[12px] right-[212px]"
+                      onClick={() => handleHiddenModal()}
+                    >
                       <AiOutlineClose />
                     </div>
                     <div className="font-semibold text-sm mt-[48px] h-[24px]">
@@ -67,8 +135,10 @@ export default function Login({}) {
                       </h2>
                     </div>
                     {isRegister && (
-                      <div className="w-[100%] h-[48px] mb-4 ">
+                      <div className="w-[100%] h-[48px] mb-6 ">
                         <InputForm
+                          setInvalidFields={setInvalidFields}
+                          invalidFields={invalidFields}
                           className=""
                           label={"Họ và tên"}
                           type={"name"}
@@ -80,20 +150,23 @@ export default function Login({}) {
                       </div>
                     )}
 
-                    <div className="w-[100%] h-[48px] mb-4 ">
+                    <div className="w-[100%] h-[48px] mb-6 ">
                       <InputForm
+                        setInvalidFields={setInvalidFields}
+                        invalidFields={invalidFields}
                         className=""
                         label={"Số điện thoại"}
-                        type={"phone"}
+                        type={"number"}
                         id={"phone"}
                         Icons={FiUser}
                         value={payload.phone}
                         setValue={setPayload}
-
                       />
                     </div>
-                    <div className="w-[100%] h-[48px] mb-4 ">
+                    <div className="w-[100%] h-[48px] mb-6 ">
                       <InputForm
+                        setInvalidFields={setInvalidFields}
+                        invalidFields={invalidFields}
                         className="py-[13px] px-[43px]"
                         type={"password"}
                         id={"password"}
@@ -102,7 +175,6 @@ export default function Login({}) {
                         isPass={true}
                         value={payload.password}
                         setValue={setPayload}
-
                       />
                     </div>
                     <Button
@@ -120,8 +192,8 @@ export default function Login({}) {
                           required
                         />
                         <label
-                          for="remember"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          htmlFor="remember"
+                          className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           Nhớ mật khẩu
                         </label>
@@ -164,7 +236,13 @@ export default function Login({}) {
                           <small>
                             Bạn đã có tài khoản?{" "}
                             <span
-                              onClick={() => setIsRegister(false)}
+                              onClick={() => {
+                                setPayload({
+                                  phone: "",
+                                  name: "",
+                                  password: "",
+                                })
+                                setIsRegister(false)}}
                               className="text-red-500 cursor-pointer"
                             >
                               Đăng nhập
@@ -173,19 +251,23 @@ export default function Login({}) {
                           </small>
                         </>
                       ) : (
-                        
-                          <small>
-                            Chưa là thành viên?{" "}
-                            <span
-
-                              onClick={() => setIsRegister(true)}
-                              className="text-red-500 cursor-pointer"
-                            >
-                              Đăng kí
-                            </span>{" "}
-                            tại đây
-                          </small>
-                        
+                        <small>
+                          Chưa là thành viên?{" "}
+                          <span
+                            onClick={() => {
+                              setPayload({
+                                phone: "",
+                                name: "",
+                                password: "",
+                              })
+                              setIsRegister(true)
+                            }}
+                            className="text-red-500 cursor-pointer"
+                          >
+                            Đăng kí
+                          </span>{" "}
+                          tại đây
+                        </small>
                       )}
                     </div>
                   </div>

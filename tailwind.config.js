@@ -12,6 +12,14 @@ module.exports = {
         secondary2: "#E03C31",
         secondary3: "rgb(255, 236, 235)",
       },
+      maxWidth: {
+        '600':'600px',
+        '1100':'1100px',
+      },
+      cursor:{
+        pointer:'pointer',
+      }
+
     },
   },
   plugins: [],

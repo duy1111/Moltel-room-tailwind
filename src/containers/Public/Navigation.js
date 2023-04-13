@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import Item from "../../components/ItemHeader";
 import { apiGetCategories } from '../../services/category';
-import { formatVietnameseToString } from '../../utils/constant';
+import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString';
 
 
 const Navigation = () => {
@@ -39,7 +39,7 @@ const Navigation = () => {
 
     return (
         <div className="w-screen h-[57px] border-b-2 shadow-md flex items-center justify-center">
-            <div className="h-max w-[1200px] flex justify-between">
+            <div className="h-max w-[1100px] flex justify-between">
                 {categories?.length > 0 &&
                     categories.map((item) => {
                         return (

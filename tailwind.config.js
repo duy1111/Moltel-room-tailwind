@@ -11,6 +11,8 @@ module.exports = {
         secondary1: "#1266dd",
         secondary2: "#E03C31",
         secondary3: "rgb(255, 236, 235)",
+        overplay30:'rgba(0,0,0,0.3)',
+        overplay70:'rgba(0,0,0,0.7)',
       },
       maxWidth: {
         '600':'600px',

@@ -1,15 +1,16 @@
-import React from 'react'
+import React ,{memo}from 'react'
 
 const ProvinceButton = ({name,image}) => {
   return (
-    <div>
+    <div className=' shadow-md hover:shadow-xl rounded-md cursor-pointer text-red-700  hover:text-orange-600' >
         <img
-            src={'https://phongtro123.com/images/location_hcm.jpg'}
-            alt='hcm'
+            src={image}
+            alt='name'
             className='w-[190px] h-[110px] object-cover rounded-t-md'
         />
+        <div className=' p-2 font-semibold flex items-center justify-center '>{name}</div>
     </div>
   )
 }
 
-export default ProvinceButton
+export default memo(ProvinceButton)

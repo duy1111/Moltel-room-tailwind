@@ -4,7 +4,7 @@ import icons from '../../utils/icons';
 const {BsChevronRight,HiLocationMarker,GiMoneyStack,BiArea,GiFamilyHouse,BsSearch} = icons
 const Search = () => {
   return (
-    <div className='py-2 px-2 gap-2 bg-[#666666] rounded-md flex-col lg:flex-row flex items-center justify-around' >
+    <div className='py-2 px-2 gap-2 bg-[#666666] rounded-md flex-col lg:flex-row flex items-center justify-around w-4/5 max-w-[1100px] ' >
         <SearchItem
             fontWeight
             IconBefore={<GiFamilyHouse  />}

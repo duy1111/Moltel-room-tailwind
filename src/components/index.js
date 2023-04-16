@@ -5,3 +5,5 @@ export { default as ProvinceButton } from "./ProvinceButton";
 export { default as Province } from "./Province";
 export { default as ButtonV2 } from "./ButtonV2";
 export { default as Item } from "./Item";
+export { default as PageNumber } from "./PageNumber";
+export { default as ItemSidebar } from "./ItemSidebar";

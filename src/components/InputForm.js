@@ -14,7 +14,6 @@ const InputForm = ({
   invalidFields,
   setInvalidFields
 }) => {
-  console.log("check isPass", isPass);
   const [showPass, setShowPass] = React.useState(false);
   let isShowPass = () => {};
   return (

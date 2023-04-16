@@ -17,7 +17,6 @@ const Navigation = () => {
         })
         let TC = [{"code":"home","value":"Trang chủ","active":true}]
         let newData = TC.concat(data)
-        console.log('check res data', newData)
 
         setCategories(newData)
       }
@@ -32,13 +31,12 @@ const Navigation = () => {
         return { ...menu, active: false };
       }
     });
-    console.log('check update item',updatedMenuItems)
     setCategories(updatedMenuItems); 
   }
   
 
     return (
-        <div className="w-screen h-[57px] border-b-2 shadow-md flex items-center justify-center">
+        <div className="w-full h-[57px] border-b-2 shadow-md flex items-center justify-center">
             <div className="h-max w-[1100px] flex justify-between">
                 {categories?.length > 0 &&
                     categories.map((item) => {

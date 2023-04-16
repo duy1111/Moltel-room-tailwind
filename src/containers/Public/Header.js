@@ -17,7 +17,6 @@ function Header() {
     navigate(path.LOGIN, { state: { flag } });
   }, []);
   const { isLoggedIn } = useSelector(state => state.auth)
-  console.log('check loginheader',isLoggedIn)
   return (
     <div>
       <div className="w-screen h-1200 flex items-center justify-between border border-gray-300">

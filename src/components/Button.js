@@ -9,7 +9,7 @@ const Button = ({
   fullWidth,
   border,
 }) => {
-  console.log(Icons);
+ 
   return (
     <button
       type="button"

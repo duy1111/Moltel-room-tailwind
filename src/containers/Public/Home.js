@@ -5,13 +5,13 @@ import Navigation from "./Navigation";
 import Search from "./Search";
 function Home() {
   return (
-    <div className="h-screen w-full flex justify-center flex-col items-center gap-5">
+    <div className="w-full flex justify-center flex-col items-center gap-5">
       <div>
         <Header />
         <Navigation />
       </div>
       <Search  />
-      <div className="lg:w-4/5 w-3/5 max-w-1100 m-auto h-full flex items-start flex-col justify-start border border-red-500 max-w-1200">
+      <div className="lg:w-4/5 w-3/5 max-w-1100 m-auto h-full flex items-start flex-col justify-start  max-w-1200">
         <Outlet />
       </div>
     </div>

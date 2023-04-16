@@ -46,7 +46,6 @@ export default function Login({}) {
   let handleHiddenModal = () => {
     setShowModal(false);
   };
-  console.log(invalidFields);
   const validate = (payload) => {
     let invalids = 0
     let fields = Object.entries(payload)
@@ -93,7 +92,7 @@ export default function Login({}) {
     Swal.fire('Oops !',msg,'error')
   },[msg,update])
   useEffect(() => {
-    console.log('check isLoggedIn',isLoggedIn.isLoggedIn)
+    
     isLoggedIn.isLoggedIn === true && navigate('/')
   },[isLoggedIn.isLoggedIn])
   return (

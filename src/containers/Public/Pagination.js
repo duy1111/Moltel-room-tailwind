@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState,memo} from 'react'
 import { PageNumber } from '../../components'
 import { useSelector } from 'react-redux'
 import icons from '../../utils/icons'
@@ -12,7 +12,7 @@ const Pagination = ({number,length}) => {
     const [isHideStart,setIsHideStart] = useState(false)
     useEffect(() => {
         let maxPage = Math.floor(count/length);
-        console.log('maxPage',maxPage)
+      
         let start,end;
         let check = currentPage === maxPage
         if(+currentPage === 1){
@@ -49,7 +49,7 @@ const Pagination = ({number,length}) => {
         }
         setArrPage(temp)
     },[count,length,currentPage])
-    console.log('check arr page',arrPage)
+  
     // let handlePageNumber = () => {
     //     let max = Math.floor(count/length)
     //     let arrNumber = []
@@ -78,4 +78,4 @@ const Pagination = ({number,length}) => {
   )
 }
 
-export default Pagination
+export default memo(Pagination)

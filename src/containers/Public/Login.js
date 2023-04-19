@@ -61,7 +61,7 @@ export default function Login({}) {
     fields.forEach(item => {
         switch (item[0]) {
             case 'password':
-                if (item[1].length < 6) {
+                if (item[1]?.length < 6) {
                     setInvalidFields(prev => [...prev, {
                         name: item[0],
                         message: 'Mật khẩu phải có tối thiểu 6 kí tự.'

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef,memo } from 'react';
 import { ButtonV2, Item } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions/post';
@@ -7,7 +7,7 @@ const List = ({page}) => {
     let dispatch = useDispatch();
     const { posts } = useSelector((state) => state.post);
     const listRef = useRef()
-    console.log('ddd',page)
+    
 
     let index = page
     useEffect(() => {
@@ -51,4 +51,4 @@ const List = ({page}) => {
     );
 };
 
-export default List;
+export default memo(List);

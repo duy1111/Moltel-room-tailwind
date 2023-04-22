@@ -2,8 +2,17 @@ import React, { memo } from 'react';
 import icons from '../utils/icons';
 import { formatVietnameseToString } from '../utils/common/formatVietnameseToString';
 import { Link } from 'react-router-dom';
+import * as action from '../store/actions'
+import { createSearchParams, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 let { BsChevronRight } = icons;
-let ItemSidebar = ({ title, content,isDouble }) => {
+let ItemSidebar = ({ title, content,isDouble,type }) => {
+    const navigate = useNavigate();
+    let location = useLocation()
+    
+
+    let dispatch = useDispatch()
     let formatContent = () => {
         let oddNumber = content?.filter((item,index) => index %2 !==0)
         let evenNumber = content?.filter((item,index) => index %2 ===0)
@@ -14,6 +23,15 @@ let ItemSidebar = ({ title, content,isDouble }) => {
             }
         })
         return formatedContent
+    }
+    let handleFilterPost = (code) => {
+
+        navigate({
+            pathname: location?.pathname,
+            search: createSearchParams({
+                [type]: code,
+            }).toString(),
+        });
     }
     return (
         <div className="w-full rounded-md p-4 bg-white shadow-md">
@@ -38,11 +56,11 @@ let ItemSidebar = ({ title, content,isDouble }) => {
                                     className=" "
                                 >
                                     <div className='flex items-center justify-around cursor-pointer ' >
-                                        <div className='flex flex-1 items-center  gap-2 text-sm hover:text-red-600 border-b border-gray-300 border-dashed' >
+                                        <div onClick={() => handleFilterPost(item.left.code)} className='flex flex-1 items-center  gap-2 text-sm hover:text-red-600 border-b border-gray-300 border-dashed' >
                                             <BsChevronRight size={10} color={'#ccc'} />
                                             <p>{item.left.value}</p>
                                         </div>
-                                        <div className='flex flex-1 items-center  gap-2 text-sm hover:text-red-600 border-b border-gray-300 border-dashed' >
+                                        <div onClick={() => handleFilterPost(item.right.code)} className='flex flex-1 items-center  gap-2 text-sm hover:text-red-600 border-b border-gray-300 border-dashed' >
                                             <BsChevronRight size={10} color={'#ccc'} />
                                             <p>{item.right.value}</p>
                                         </div>

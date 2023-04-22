@@ -24,8 +24,8 @@ const Item = ({ images, user, title, star, description, attributes, address, key
                         images.filter((item, index) =>
                             indexs
                                 .some(item => item === index))
-                                ?.map((i) => {
-                                    return <img src={i} alt="preview" className="w-[140px] h-[120px] object-cover" />;
+                                ?.map((i,index2) => {
+                                    return <img key={index2} src={i} alt="preview" className="w-[140px] h-[120px] object-cover" />;
                                 },
                         )}
 

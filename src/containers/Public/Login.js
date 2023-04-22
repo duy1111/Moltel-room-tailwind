@@ -38,7 +38,7 @@ export default function Login({}) {
 
       isRegister === true ? dispatch(actions.register(payload)) : dispatch(actions.login(payload))
     }
-    console.log(invalids);
+    
 
     //setShowModal(false)
   };

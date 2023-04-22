@@ -2,20 +2,29 @@ import React, { useEffect, useRef,memo } from 'react';
 import { ButtonV2, Item } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions/post';
-
-const List = ({page}) => {
+import { useSearchParams } from 'react-router-dom';
+const List = ({categoryCode}) => {
     let dispatch = useDispatch();
+    let [searchParams] = useSearchParams()
     const { posts } = useSelector((state) => state.post);
     const listRef = useRef()
     
 
-    let index = page
+    console.log(categoryCode)
     useEffect(() => {
+        let params = [];
+        for (let entry of searchParams.entries()) {
+            params.push(entry);
+        }
+        let a = {};
+        params?.map((i) => {
+            a = { ...a, [i[0]]: i[1] };
+        });
         
-        let offset = page? page-1: 0
-        dispatch(actions.getPostsLimit(offset));
-        listRef.current.scrollIntoView({behavior:'smooth',block:'start'})
-    }, [index]);
+        if(categoryCode) a.categoryCode = categoryCode
+        dispatch(actions.getPostsLimit(a));
+        listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, [searchParams,categoryCode]);
     
     return (
         <div ref={listRef} className="flex flex-col gap-3 bg-white shadow-md  ">

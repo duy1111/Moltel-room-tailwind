@@ -9,6 +9,7 @@ const actionTypes = {
   GET_CATEGORIES: 'GET_CATEGORIES',
   GET_PRICES: 'GET_PRICES',
   GET_AREA:'GET_AREA',
+  GET_NEW_POST: "GET_NEW_POST",
 };
 
 export default actionTypes;

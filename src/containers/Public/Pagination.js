@@ -2,19 +2,27 @@ import React,{useEffect, useState,memo} from 'react'
 import { PageNumber } from '../../components'
 import { useSelector } from 'react-redux'
 import icons from '../../utils/icons'
-import { check } from 'prettier'
+import { useSearchParams } from 'react-router-dom';
+
 let {TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled} = icons
-const Pagination = ({number,length}) => {
+const Pagination = ({}) => {
     const {count} = useSelector(state => state.post)
     const [arrPage, setArrPage] = useState([])
-    const [currentPage, setCurrentPage] = useState(number)
+    const [currentPage, setCurrentPage] = useState(1)
     const [isHideEnd,setIsHideEnd] = useState(false)
     const [isHideStart,setIsHideStart] = useState(false)
+    const [params] = useSearchParams();
+    const { posts } = useSelector((state) => state.post);
     useEffect(() => {
-        let maxPage = Math.floor(count/length);
-      
+        let page = params.get('page')
+        page && +page !== currentPage && setCurrentPage(+page)
+        !page && setCurrentPage(1) 
+    },[params])
+    useEffect(() => {
+        let maxPage = Math.ceil(count/process.env.REACT_APP_LIMIT);
+        console.log('check maxPage')
+        console.log('check currentPage')
         let start,end;
-        let check = currentPage === maxPage
         if(+currentPage === 1){
             start = 1
             end = start + 3 > maxPage ? maxPage : start + 3
@@ -48,7 +56,7 @@ const Pagination = ({number,length}) => {
             setIsHideStart(false)
         }
         setArrPage(temp)
-    },[count,length,currentPage])
+    },[count,currentPage])
   
     // let handlePageNumber = () => {
     //     let max = Math.floor(count/length)
@@ -70,7 +78,7 @@ const Pagination = ({number,length}) => {
         })}
         
         {!isHideEnd&&<PageNumber  text={'...'} />}
-        {!isHideEnd&&<PageNumber  icon={<TbPlayerTrackNextFilled/>} setCurrentPage={setCurrentPage} type={'end'} text={Math.floor(count/length)} />}
+        {!isHideEnd&&<PageNumber  icon={<TbPlayerTrackNextFilled/>} setCurrentPage={setCurrentPage} type={'end'} text={Math.floor(count/process.env.REACT_APP_LIMIT)} />}
         
         
 

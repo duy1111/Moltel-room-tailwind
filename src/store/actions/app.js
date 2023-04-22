@@ -30,7 +30,7 @@ const getCategories = (payload) => async (dispatch) => {
 const getPrices = () => async (dispatch) => {
   try {
     let response = await apiGetPrices();
-    console.log(response)
+    
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_PRICES,

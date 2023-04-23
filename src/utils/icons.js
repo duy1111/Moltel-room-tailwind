@@ -10,6 +10,7 @@ import {BsChevronRight,BsSearch,BsFillBookmarkStarFill} from "react-icons/bs"
 import {HiLocationMarker} from "react-icons/hi"
 import {GiMoneyStack,GiFamilyHouse} from "react-icons/gi"
 import {TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled} from 'react-icons/tb'
+import {GrLinkPrevious} from 'react-icons/gr'
 const icons = {
   AiOutlineHeart,
   AiOutlineClose,
@@ -24,7 +25,7 @@ const icons = {
   GiMoneyStack,
   BiArea,
   GiFamilyHouse,
-  BsSearch,AiFillStar,AiFillHeart,BsFillBookmarkStarFill,TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled
+  BsSearch,AiFillStar,AiFillHeart,BsFillBookmarkStarFill,TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled,GrLinkPrevious
 };
 
 export default icons;

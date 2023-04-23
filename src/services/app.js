@@ -30,3 +30,17 @@ export const apiGetArea = () => {
     });
   };
 
+  export const apiGetProvince = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axiosConfig({
+          method: "get",
+          url: "/api/v1/province/all",
+          
+        });
+        resolve(response);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };

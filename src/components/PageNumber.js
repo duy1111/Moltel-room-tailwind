@@ -10,13 +10,20 @@ const PageNumber = ({ icon, currentPage, text, setCurrentPage, type }) => {
     let location = useLocation()
     let entries = paramsSearch.entries()
     let append = (entries) => {
-        let params = {};
+        let params = []
+        paramsSearch.append('page', +text)
         for (let entry of entries) {
-            params[entry[0]] = entry[1];
+            params.push(entry);
         }
-        console.log(params)
-        params["page"] = +text;
-        return params;
+        let searchParamsObject = {}
+        params?.forEach(i => {
+            if (Object.keys(searchParamsObject)?.some(item => item === i[0] && item !== 'page')) {
+                searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]]
+            } else {
+                searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] }
+            }
+        })
+        return searchParamsObject
           
     }
    

@@ -49,7 +49,7 @@ const Pagination = ({}) => {
         else{
             setIsHideEnd(false)
         }
-        if(currentPage - 3 <= 1){
+        if(currentPage - 3 < 1){
             setIsHideStart(true)
         }
         else{
@@ -69,7 +69,7 @@ const Pagination = ({}) => {
     // let arrNumber = handlePageNumber()
   return (
     <div className='flex items-center justify-center gap-2 py-5 ' >
-        {!isHideStart&&<PageNumber setCurrentPage={setCurrentPage} text={'1'}  icon={<TbPlayerTrackPrevFilled/>}  />}
+        {!isHideStart&&<PageNumber setCurrentPage={setCurrentPage} text={'1'}    />}
         {!isHideStart&&<PageNumber  text={'...'} />}
         {arrPage.length > 0 && arrPage.map(item => {
             return (
@@ -78,7 +78,7 @@ const Pagination = ({}) => {
         })}
         
         {!isHideEnd&&<PageNumber  text={'...'} />}
-        {!isHideEnd&&<PageNumber  icon={<TbPlayerTrackNextFilled/>} setCurrentPage={setCurrentPage} type={'end'} text={Math.floor(count/process.env.REACT_APP_LIMIT)} />}
+        {!isHideEnd&&<PageNumber  icon={<TbPlayerTrackNextFilled/>} setCurrentPage={setCurrentPage} type={'end'} text={Math.ceil(count/process.env.REACT_APP_LIMIT)} />}
         
         
 

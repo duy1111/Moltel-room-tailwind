@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,memo } from 'react';
 import icons from '../utils/icons';
 import Button from './Button';
+import { getNumbersArea, getNumbersPrice } from '../utils/common/getNumber';
+
 const { GrLinkPrevious } = icons;
 
-const Modal = ({ content, setIsShowModal, name, handleSubmit }) => {
-    const [persent1, setPersent1] = useState(0);
-    const [persent2, setPersent2] = useState(100);
+const Modal = ({ content, setIsShowModal, name, handleSubmit,arrMinMax ,queries,defaultText}) => {
+    const [persent1, setPersent1] = useState(name === 'price' && arrMinMax?.priceArr
+    ? arrMinMax?.priceArr[0]
+    : name === 'area' && arrMinMax?.areaArr ? arrMinMax?.areaArr[0] : 0);
+    const [persent2, setPersent2] = useState(name === 'price' && arrMinMax?.priceArr
+    ? arrMinMax?.priceArr[1]
+    : name === 'area' && arrMinMax?.areaArr ? arrMinMax?.areaArr[1] : 100);
     const [activedEl, setActivedEl] = useState('');
     useEffect(() => {
         const activedTrackEl = document.getElementById('track-active');
@@ -19,27 +25,26 @@ const Modal = ({ content, setIsShowModal, name, handleSubmit }) => {
             }
         }
     }, [persent1, persent2]);
-    useEffect(() => {
-        let activedTrackEl = document.getElementById('track-active');
-        activedTrackEl.style.right = `${100 - persent2}%`;
-    }, [persent2]);
+    
     const convertto100 = (percent) => {
         let target = name === 'price' ? 15 : name === 'area' ? 90 : 1;
         return Math.floor((percent / target) * 100);
     };
     const handleBeforeSubmit = (e) => {
-       console.log('submit')
-    };
-    const getNumbersPrice = (string) =>
-        string
-            .split(' ')
-            .map((item) => +item)
-            .filter((item) => !item === false);
-    const getNumbersArea = (string) =>
-        string
-            .split(' ')
-            .map((item) => +item.match(/\d+/))
-            .filter((item) => item !== 0);
+        let min = persent1 <= persent2 ? +persent1 : +persent2
+        let max = persent1 <= persent2 ? +persent2 : +persent1
+        let arrMinMax = [convert100toTarget(min), convert100toTarget(max)]
+        // const gaps = name === 'price'
+        //     ? getCodes(arrMinMax, content)
+        //     : name === 'area' ? getCodesArea(arrMinMax, content) : []
+        handleSubmit(e, {
+            [`${name}Number`]: arrMinMax,
+            [name]: `Từ ${convert100toTarget(min)} - ${convert100toTarget(max)} ${name === 'price' ? 'triệu' : 'm2'}`
+        }, {
+            [`${name}Arr`]: [+min, +max]
+        })
+    }
+    
     const handleActive = (code, value) => {
         setActivedEl(code);
         let arrMaxMin = name === 'price' ? getNumbersPrice(value) : getNumbersArea(value);
@@ -107,13 +112,20 @@ const Modal = ({ content, setIsShowModal, name, handleSubmit }) => {
                 </div>
                 {(name === 'category' || name === 'province') && (
                     <div className="p-4 flex flex-col ">
+                        <span
+                                    
+                                    className="py-2 flex gap-2 items-center border-b border-gray-200 border-dashed"
+                                >
+                                    <input type="radio" checked={!queries[`${name}Code`] ? true : false} name={name} id={'default'} value={defaultText || ''} onClick={(e) => handleSubmit(e,{[name]:defaultText ,[`${name}Code`]:null })} />
+                                    <label htmlFor={'default'}>{defaultText}</label>
+                                </span>
                         {content?.map((item) => {
                             return (
                                 <span
                                     key={item.code}
                                     className="py-2 flex gap-2 items-center border-b border-gray-200 border-dashed"
                                 >
-                                    <input type="radio" name={name} id={item.code} value={item.code} />
+                                    <input type="radio" checked={item.code === queries[`${name}Code`] ? true : false} name={name} id={item.code} value={item.code} onClick={(e) => handleSubmit(e,{[name]:item.value ,[`${name}Code`]:item.code })} />
                                     <label htmlFor={item.code}>{item.value}</label>
                                 </span>
                             );
@@ -157,7 +169,7 @@ const Modal = ({ content, setIsShowModal, name, handleSubmit }) => {
                             <input
                                 className="w-full appearance-none pointer-events-none absolute top-0 bottom-0"
                                 onChange={(e) => {
-                                    setPersent1(+e.target.value);
+                                    setPersent2(+e.target.value);
                                     activedEl && setActivedEl('');
                                 }}
                                 min={0}
@@ -184,7 +196,7 @@ const Modal = ({ content, setIsShowModal, name, handleSubmit }) => {
                                     handleClickTrack(e, 100);
                                 }}
                             >
-                                15 triệu+
+                                {name ==='price' ? '15 triệu+':'90m+' }
                             </span>
                         </div>
 
@@ -206,15 +218,15 @@ const Modal = ({ content, setIsShowModal, name, handleSubmit }) => {
                         </div>
                     </div>
                 )}
-                <button
-                    onClick={() => handleBeforeSubmit()}
+                {(name === 'price' || name === 'area') &&<button
+                    onClick={handleBeforeSubmit}
                     className="w-full text-center text-white bg-secondary2 font-medium relative bottom-0 py-2 uppercase "
                 >
                     Áp dụng
-                </button>
+                </button>}
             </div>
         </div>
     );
 };
 
-export default Modal;
+export default memo(Modal);

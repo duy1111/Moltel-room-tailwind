@@ -45,6 +45,7 @@ export default function Login({}) {
 
   let handleHiddenModal = () => {
     setShowModal(false);
+    navigate('/')
   };
   const validate = (payload) => {
     let invalids = 0

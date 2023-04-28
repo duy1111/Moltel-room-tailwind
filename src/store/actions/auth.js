@@ -46,7 +46,7 @@ let login = (payload) => async (dispatch) => {
     });
   }
 };
-let logout = () => ({
-  type: actionTypes.LOGOUT,
-});
+const logout = () => ({
+  type: actionTypes.LOGOUT
+})
 export { register, login ,logout};

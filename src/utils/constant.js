@@ -7,8 +7,11 @@ export const path = {
   NHA_CHO_THUE:"nha-cho-thue",
   CHO_THUE_PHONG_TRO:"cho-thue-phong-tro",
   DETAIL_POST__TITLE___POSTID:"chi-tiet/:title/:postId",
+  SEARCH: 'tim-kiem',
+  DETAIL_POST:'chi-tiet/*',
+  SYSTEM:'/he-thong/*',
+  CREATE_POST:'tao-moi-bai-dang'
 
-  DETAIL_POST:'chi-tiet/*'
 };
 export const text = {
   HOME_TITLE: "Kênh thông tin Phòng Trọ số 1 Việt Nam",

@@ -3,6 +3,7 @@ import { ButtonV2, Item } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions/post';
 import { useSearchParams } from 'react-router-dom';
+import { check } from 'prettier';
 const List = ({categoryCode}) => {
     let dispatch = useDispatch();
     let [searchParams] = useSearchParams()
@@ -12,17 +13,24 @@ const List = ({categoryCode}) => {
 
     console.log(categoryCode)
     useEffect(() => {
-        let params = [];
+        let params = []
         for (let entry of searchParams.entries()) {
             params.push(entry);
         }
-        let a = {};
-        params?.map((i) => {
-            a = { ...a, [i[0]]: i[1] };
-        });
-        
-        if(categoryCode) a.categoryCode = categoryCode
-        dispatch(actions.getPostsLimit(a));
+        let searchParamsObject = {
+            
+        }
+        params?.forEach(i => {
+            if (Object.keys(searchParamsObject)?.some(item => item === i[0])) {
+                searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]]
+            } else {
+                searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] }
+            }
+        })
+        if (categoryCode) searchParamsObject.categoryCode = categoryCode
+        console.log('check ',searchParamsObject)
+        dispatch(actions.getPostsLimit(searchParamsObject))
+      
         listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, [searchParams,categoryCode]);
     

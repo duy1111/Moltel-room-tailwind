@@ -7,7 +7,7 @@ import * as actions from '../../store/actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-const Navigation = () => {
+const Navigation = ({isAdmin}) => {
     let [category,setCategory] = useState([])
     const dispatch = useDispatch();
     let { categories } = useSelector((state) => state.app);
@@ -38,7 +38,7 @@ const Navigation = () => {
   
 
     return (
-        <div className="w-full h-[57px] border-b-2 shadow-md flex items-center justify-center">
+        <div className={`w-full h-[57px]  flex items-center ${isAdmin ?'justify-start':'justify-center'}  `}>
             <div className="h-max w-[1100px] flex justify-between">
                 {category.map((item) => {
                     return (
@@ -46,7 +46,7 @@ const Navigation = () => {
                             <Item
                                 className="h-[50px] w-[200px] flex items-center justify-center font-medium"
                                 text={item.value}
-                                link={formatVietnameseToString(item.value)}
+                                link={`/${formatVietnameseToString(item.value)}`}
                                 isActive={item.active}
                             ></Item>
                         </div>

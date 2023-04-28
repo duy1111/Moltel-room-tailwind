@@ -1,16 +1,18 @@
 import { AiOutlineHeart,AiFillHeart } from "react-icons/ai";
 import { AiOutlineClose,AiFillStar } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
-import { BiLockAlt,BiArea } from "react-icons/bi";
+import { BiLockAlt,BiArea ,BiLogOut} from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { AiFillGoogleCircle } from "react-icons/ai";
-import {BsChevronRight,BsSearch,BsFillBookmarkStarFill} from "react-icons/bs"
+import {BsChevronRight,BsSearch,BsFillBookmarkStarFill,BsFillFileEarmarkPostFill} from "react-icons/bs"
 import {HiLocationMarker} from "react-icons/hi"
 import {GiMoneyStack,GiFamilyHouse} from "react-icons/gi"
-import {TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled} from 'react-icons/tb'
+import {TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled,TbPencilPlus} from 'react-icons/tb'
 import {GrLinkPrevious} from 'react-icons/gr'
+
+
 const icons = {
   AiOutlineHeart,
   AiOutlineClose,
@@ -25,7 +27,7 @@ const icons = {
   GiMoneyStack,
   BiArea,
   GiFamilyHouse,
-  BsSearch,AiFillStar,AiFillHeart,BsFillBookmarkStarFill,TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled,GrLinkPrevious
+  BsSearch,AiFillStar,AiFillHeart,BsFillBookmarkStarFill,TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled,GrLinkPrevious,TbPencilPlus,BsFillFileEarmarkPostFill,BiLogOut
 };
 
 export default icons;

@@ -10,4 +10,5 @@ export { default as Intro } from "./Intro";
 export { default as Contact } from "./Contact";
 export { default as SmallItem } from "./SmallItem";
 export { default as Modal } from "./Modal";
+export { default as User } from "./User";
 

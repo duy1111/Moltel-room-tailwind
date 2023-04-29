@@ -11,4 +11,8 @@ export { default as Contact } from "./Contact";
 export { default as SmallItem } from "./SmallItem";
 export { default as Modal } from "./Modal";
 export { default as User } from "./User";
+export { default as Address } from "./Address";
+export { default as Overview } from "./Overview";
+export { default as SelectInput } from "./SelectInput";
+export { default as InputReadOnly } from "./InputReadOnly";
 

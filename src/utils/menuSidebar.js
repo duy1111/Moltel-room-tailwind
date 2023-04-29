@@ -26,10 +26,5 @@ export const menuSidebar = [
         icon: <FiUser/>,
         path:'/he-thong/lien-he',
     },
-    {
-        id:5,
-        text:'Sửa thông tin cá nhân',
-        icon: <FiUser/>,
-        path:'/he-thong/sua-thong-tin-ca-nhan',
-    },
+    
 ]

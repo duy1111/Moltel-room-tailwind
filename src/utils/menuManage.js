@@ -21,3 +21,19 @@ export const menuManage = [
         path:'/he-thong/thong-tin-tai-khoan',
     }
 ]
+
+export const menuObject = [
+    {
+        id:1,
+        value:'Nam',
+        code:'Nam'
+        
+    },
+    {
+        id:2,
+        value:'Nữ',
+        code:'Nu'
+       
+
+    },
+]

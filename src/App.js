@@ -16,6 +16,12 @@ function App() {
     },1000)
     
 },[isLoggedIn])
+useEffect(() => {
+  dispatch(actions.getPrices());
+  dispatch(actions.getArea());
+  dispatch(actions.getProvince());
+
+}, []);
   return (
     <div className=" w-full bg-primary">
       <Routes>

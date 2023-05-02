@@ -1,22 +1,17 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import Header from './Header';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Navigation from './Navigation';
 import Search from './Search';
 import { Intro, Contact } from '../../components';
-import { useDispatch,useSelector } from 'react-redux';
-import * as actions from '../../store/actions';
+import { useSelector } from 'react-redux';
+
 
 function Home() {
-    let dispatch = useDispatch();
+  
     
     const {currentData} = useSelector(state => state.user)
-    useEffect(() => {
-        dispatch(actions.getPrices());
-        dispatch(actions.getArea());
-        dispatch(actions.getProvince());
-
-    }, []);
+    
     
     console.log(currentData)
     return (

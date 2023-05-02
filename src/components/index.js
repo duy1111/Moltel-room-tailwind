@@ -15,4 +15,7 @@ export { default as Address } from "./Address";
 export { default as Overview } from "./Overview";
 export { default as SelectInput } from "./SelectInput";
 export { default as InputReadOnly } from "./InputReadOnly";
+export { default as InputFormV2 } from "./inputFormV2";
+export { default as Loading } from "./Loading";
+
 

@@ -1,12 +1,13 @@
-import React, { useEffect ,useState} from 'react'
+import React, { memo, useEffect ,useState} from 'react'
 import { apiGetPublicProvince,apiGetPublicDistrict } from '../services/app';
 import SelectInput from './SelectInput';
+import InputReadOnly from './InputReadOnly';
 
-const Address = () => {
+const Address = ({payload,setPayload}) => {
     const [provinces, setProvinces] = useState([])
     const [districts, setDistricts] = useState([])
-    const [province, setProvince] = useState()
-    const [district, setDistrict] = useState()
+    const [province, setProvince] = useState('')
+    const [district, setDistrict] = useState('')
     const [reset, setReset] = useState(false)
     useEffect(() => {
         const fetchPublicProvince = async () => {
@@ -19,6 +20,7 @@ const Address = () => {
         }
         fetchPublicProvince()
     },[])
+
     useEffect(() => {
         setDistrict(null)
         let fetchPublicDistrict = async () => {
@@ -31,8 +33,14 @@ const Address = () => {
         province && fetchPublicDistrict()
         province ? setReset(false) : setReset(true)
     },[province])
-    console.log('check res pro',province)
-    console.log('check res dis',district)
+    useEffect(() => {
+        setPayload(prev => ({
+            ...prev,
+            address: `${district ? `${districts.find((item) => item.district_id === district)?.district_name}, ` : ''} ${province ? `${provinces.find((item) => item.province_id === province)?.province_name}`: ''}`,
+            province: province ? provinces?.find(item => item.province_id === province)?.province_name : ''
+        }))
+    },[province,district])
+   
     return (
         <div>
             <h2 className="font-semibold text-xl ">Địa chỉ cho thuê</h2>
@@ -42,20 +50,10 @@ const Address = () => {
                     <SelectInput reset={reset} value={district} setValue={setDistrict}   options={districts} label={'Quận/Huyện'} />
                 </div>
 
-                <div className='flex flex-col gap-2 w-full'>
-                    <label className='font-medium' htmlFor='exactly-address' >Địa chỉ chính xác</label>
-                    <input
-
-                        value={`${district ? `${districts.find((item) => item.district_id === district)?.district_name}, ` : ''} ${province ? `${provinces.find((item) => item.province_id === province)?.province_name}`: ''}`}
-                        type="text"
-                        id='exactly-address'
-                        className="border border-gray-300 rounded-md bg-gray-200 p-2 w-full outline-none"
-                        readOnly
-                    />
-                </div>
+                <InputReadOnly label={'Địa chỉ chính xác'} value={`${district ? `${districts.find((item) => item.district_id === district)?.district_name}, ` : ''} ${province ? `${provinces.find((item) => item.province_id === province)?.province_name}`: ''}`} />
             </div>
         </div>
     );
 };
 
-export default Address;
+export default memo(Address);

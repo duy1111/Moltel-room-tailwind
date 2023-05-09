@@ -12,10 +12,10 @@ const System = () => {
   return (
     <div className='w-full flex justify-center flex-col items-center gap-2' >
         <Header/>
-        <div className='flex w-full'>
+        <div className='flex w-full h-screen'>
             <Sidebar/>
-            <div className='flex-auto p-4' ><Outlet/></div>
-        </div>
+            <div className='flex-auto p-4 overflow-y-scroll' ><Outlet/></div>
+        </div> 
     </div>
   )
 }

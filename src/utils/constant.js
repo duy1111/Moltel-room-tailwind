@@ -10,7 +10,9 @@ export const path = {
   SEARCH: 'tim-kiem',
   DETAIL_POST:'chi-tiet/*',
   SYSTEM:'/he-thong/*',
-  CREATE_POST:'tao-moi-bai-dang'
+  CREATE_POST:'tao-moi-bai-dang',
+  MANAGE_POST:'quan-ly-bai-dang',
+  EDIT_PROFILE:'sua-thong-tin-ca-nhan',
 
 };
 export const text = {

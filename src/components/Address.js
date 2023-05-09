@@ -3,7 +3,7 @@ import { apiGetPublicProvince,apiGetPublicDistrict } from '../services/app';
 import SelectInput from './SelectInput';
 import InputReadOnly from './InputReadOnly';
 
-const Address = ({payload,setPayload}) => {
+const Address = ({payload,setPayload,invalidFields,setInvalidFields}) => {
     const [provinces, setProvinces] = useState([])
     const [districts, setDistricts] = useState([])
     const [province, setProvince] = useState('')
@@ -22,7 +22,7 @@ const Address = ({payload,setPayload}) => {
     },[])
 
     useEffect(() => {
-        setDistrict(null)
+        setDistrict('')
         let fetchPublicDistrict = async () => {
             let res = await apiGetPublicDistrict(province)
             if(res && res.status  === 200){
@@ -36,7 +36,7 @@ const Address = ({payload,setPayload}) => {
     useEffect(() => {
         setPayload(prev => ({
             ...prev,
-            address: `${district ? `${districts.find((item) => item.district_id === district)?.district_name}, ` : ''} ${province ? `${provinces.find((item) => item.province_id === province)?.province_name}`: ''}`,
+            address: `${district ? `${districts.find((item) => item.district_id === district)?.district_name}, ` : ''}${province ? `${provinces.find((item) => item.province_id === province)?.province_name}`: ''}`,
             province: province ? provinces?.find(item => item.province_id === province)?.province_name : ''
         }))
     },[province,district])
@@ -46,8 +46,8 @@ const Address = ({payload,setPayload}) => {
             <h2 className="font-semibold text-xl ">Địa chỉ cho thuê</h2>
             <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-4">
-                    <SelectInput type={'province'} value={province} setValue={setProvince} options={provinces} label={'Tỉnh/Thành phố'} />
-                    <SelectInput reset={reset} value={district} setValue={setDistrict}   options={districts} label={'Quận/Huyện'} />
+                    <SelectInput setInvalidFields={setInvalidFields} invalidFields={invalidFields} type={'province'} value={province} setValue={setProvince} options={provinces} label={'Tỉnh/Thành phố'} />
+                    <SelectInput setInvalidFields={setInvalidFields} invalidFields={invalidFields}  reset={reset} value={district} setValue={setDistrict}   options={districts} label={'Quận/Huyện'} />
                 </div>
 
                 <InputReadOnly label={'Địa chỉ chính xác'} value={`${district ? `${districts.find((item) => item.district_id === district)?.district_name}, ` : ''} ${province ? `${provinces.find((item) => item.province_id === province)?.province_name}`: ''}`} />

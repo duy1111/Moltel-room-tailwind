@@ -4,7 +4,7 @@ import { text } from '../utils/dataContact';
 import Button from './Button';
 const Contact = () => {
   return (
-    <div className='w-[1200px] flex flex-col justify-center items-center gap-4 border-[#e8eefc] border-8 border-dashed mb-8' >
+    <div className='w-full flex flex-col justify-center items-center gap-4 border-[#e8eefc] border-8 border-dashed rounded-2xl mb-8' >
         <div className=' h-[150px] w-full flex justify-center mt-11' >
             <img src={image} alt="logo" className='h-full w-[440px] object-container' />
         </div>

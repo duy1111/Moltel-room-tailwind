@@ -60,3 +60,18 @@ export const apiUploadImages = (images) => {
     }
   });
 };
+
+export const apiCreatePosts = (payload) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "post",
+        url: `/api/v1/post/create-new-post`,  
+        data:payload
+      });
+      resolve(response);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};

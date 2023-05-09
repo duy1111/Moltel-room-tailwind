@@ -21,7 +21,7 @@ const Item = ({ images, user, title, star, description, attributes, address, key
             <Link to={`chi-tiet/${formatVietnameseToString(title)}/${id}`} className="w-[42%] h-[240px] flex ">
                 <div className="w-full flex gap-[2px] items-start flex-wrap relative">
                     {images?.length > 4 &&
-                        images.filter((item, index) =>
+                        images?.filter((item, index) =>
                             indexs
                                 .some(item => item === index))
                                 ?.map((i,index2) => {

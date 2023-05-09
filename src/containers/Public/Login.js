@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as actions from "../../store/actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import { validate } from "../../utils/common/validateFields";
 let {
   AiOutlineClose,
   FiUser,
@@ -33,7 +34,7 @@ export default function Login({}) {
       phone: payload.phone,
       password: payload.password
     }
-    let invalids = validate(finalPayload);
+    let invalids = validate(finalPayload,setInvalidFields);
     if(invalids === 0){
 
       isRegister === true ? dispatch(actions.register(payload)) : dispatch(actions.login(payload))
@@ -47,45 +48,7 @@ export default function Login({}) {
     setShowModal(false);
     navigate('/')
   };
-  const validate = (payload) => {
-    let invalids = 0
-    let fields = Object.entries(payload)
-    fields.forEach(item => {
-        if (item[1] === '') {
-            setInvalidFields(prev => [...prev, {
-                name: item[0],
-                message: 'Bạn không được bỏ trống trường này.'
-            }])
-            invalids++
-        }
-    })
-    fields.forEach(item => {
-        switch (item[0]) {
-            case 'password':
-                if (item[1]?.length < 6) {
-                    setInvalidFields(prev => [...prev, {
-                        name: item[0],
-                        message: 'Mật khẩu phải có tối thiểu 6 kí tự.'
-                    }])
-                    invalids++
-                }
-                break;
-            case 'phone':
-                if (!+item[1]) {
-                    setInvalidFields(prev => [...prev, {
-                        name: item[0],
-                        message: 'Số điện thoại không hợp lệ.'
-                    }])
-                    invalids++
-                }
-                break
-
-            default:
-                break;
-        }
-    })
-    return invalids
-}
+  
   useEffect(() => {
     setIsRegister(location.state?.flag);
   }, [location.state?.flag]);

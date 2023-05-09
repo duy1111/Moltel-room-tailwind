@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Login,Rental,HomePage,DetailPost,SearchDetail } from "./containers/Public";
 import { path } from "./utils/constant";
-import { CreatePost, System } from "./containers/System";
+import { CreatePost, EditProfile, ManagePost, System } from "./containers/System";
 import { useEffect } from "react";
 import { useDispatch,useSelector } from 'react-redux';
 import * as actions from './store/actions';
@@ -23,7 +23,7 @@ useEffect(() => {
 
 }, []);
   return (
-    <div className=" w-full bg-primary">
+    <div className=" w-full bg-primary overflow-hidden">
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path={path.DETAIL_POST__TITLE___POSTID} element={<DetailPost/>} />
@@ -39,6 +39,8 @@ useEffect(() => {
         </Route>
         <Route path={path.SYSTEM} element={<System/>} >
           <Route path={path.CREATE_POST} element={<CreatePost/>} />
+          <Route path={path.MANAGE_POST} element={<ManagePost/>} /> 
+          <Route path={path.EDIT_PROFILE} element={<EditProfile/>} /> 
         </Route>
       </Routes>
     </div>

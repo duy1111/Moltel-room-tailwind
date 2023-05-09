@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import InputReadOnly from './InputReadOnly';
 import { InputFormV2 } from '.';
 import { menuObject } from '../utils/menuManage';
-const Overview = ({ payload, setPayload }) => {
+const Overview = ({ payload, setPayload, setInvalidFields, invalidFields }) => {
     const { categories } = useSelector((state) => state.app);
     const { currentData } = useSelector((state) => state.user);
 
@@ -18,8 +18,17 @@ const Overview = ({ payload, setPayload }) => {
                     setValue={setPayload}
                     options={categories}
                     label={'Loại chuyên mục'}
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
                 />
-                <InputFormV2 value={payload.title} name={'title'} setValue={setPayload} label={'Tiêu đề'} />
+                <InputFormV2
+                    value={payload.title}
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
+                    name={'title'}
+                    setValue={setPayload}
+                    label={'Tiêu đề'}
+                />
 
                 <div className="flex flex-col w-full">
                     <label htmlFor="description">Nội dung mô tả</label>
@@ -31,7 +40,11 @@ const Overview = ({ payload, setPayload }) => {
                         id=""
                         cols={'30'}
                         rows={'10'}
+                onFocus={(e) => setInvalidFields([])}
+
                     />
+                            <small className='text-red-500 block w-full' >{`${invalidFields?.find(item => item.name === 'description')?.message || '' }`}</small>
+
                 </div>
                 <InputReadOnly label={'Thông tin liên hệ'} value={currentData.name} />
                 <InputReadOnly label={'Điện thoại'} value={currentData.phone} />
@@ -42,11 +55,28 @@ const Overview = ({ payload, setPayload }) => {
                     unit={'đồng'}
                     setValue={setPayload}
                     name={'priceNumber'}
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
                 />
-                <InputFormV2 value={payload.areaNumber} name={'areaNumber'} setValue={setPayload} label={'Diện tích'} unit={'m²'} />
-                <SelectInput defaultValue={'Tất cả'} options={menuObject} label={'Đối tượng cho thuê'} value={payload.target}
+                <InputFormV2
+                    value={payload.areaNumber}
+                    name={'areaNumber'}
+                    setValue={setPayload}
+                    label={'Diện tích'}
+                    unit={'m²'}
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
+                />
+                <SelectInput
+                    defaultValue={'Tất cả'}
+                    options={menuObject}
+                    label={'Đối tượng cho thuê'}
+                    value={payload.target}
                     name={'target'}
-                    setValue={setPayload} />
+                    setValue={setPayload}
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
+                />
             </div>
         </div>
     );

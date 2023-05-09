@@ -21,11 +21,11 @@ function Home() {
                 <div className='shadow-md w-full border-b-2 '><Navigation /></div>
             </div>
             <Search />
-            <div className="lg:w-4/5 w-3/5 max-w-1100 m-auto h-full flex items-start flex-col justify-start  max-w-1200">
+            <div className="lg:w-4/5 w-3/5 max-w-1100 m-auto h-full flex items-start flex-col justify-start  max-w-1200 overflow-y-scroll">
                 <Outlet />
             </div>
             <Intro />
-            <Contact />
+            <div className='w-[1200px]'><Contact /></div>
         </div>
     );
 }

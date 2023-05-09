@@ -17,12 +17,18 @@ const getCurrentUser = () => async (dispatch) => {
           data: [],
           msg: response.data.msg,
         });
+        dispatch({
+          type: actionTypes.LOGOUT
+        });
       }
     } catch (e) {
       dispatch({
         type: actionTypes.GET_CURRENT,
         data: [],
         msg: e,
+      });
+      dispatch({
+        type: actionTypes.LOGOUT
       });
     }
   };

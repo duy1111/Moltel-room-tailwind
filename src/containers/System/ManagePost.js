@@ -7,13 +7,15 @@ import * as actions from '../../store/actions';
 const ManagePost = () => {
     let dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false);
-    const { postOfCurrent } = useSelector((state) => state.post);
-
+    const { postOfCurrent,dataEdit } = useSelector((state) => state.post);
+    
     useEffect(() => {
-        dispatch(actions.getPostsAdmin());
-    }, []);
+        dataEdit && dispatch(actions.getPostsAdmin());
+    }, [dataEdit]);
 
-    console.log('ddddd', postOfCurrent);
+    let handleDeletePost = (postId) => {
+        
+    }
     return (
         <div className="p-6">
             <div className="flex justify-between border-b border-gray-300 items-center">
@@ -109,7 +111,9 @@ const ManagePost = () => {
                                                             >
                                                                 Sửa
                                                             </button>
-                                                            <button className="outline-none">Xóa</button>
+                                                            <button 
+                                                            onClick={() => handleDeletePost(item.id)}
+                                                            className="outline-none">Xóa</button>
                                                         </td>
                                                     </tr>
                                                 );

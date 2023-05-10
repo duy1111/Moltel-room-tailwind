@@ -107,3 +107,20 @@ export const apiUpdatePost = (data) => {
     }
   });
 };
+
+export const apiDeletePost = (postId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "delete",
+        url: `/api/v1/post/delete-post`,
+        params:{postId}
+        
+        
+      });
+      resolve(response);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};

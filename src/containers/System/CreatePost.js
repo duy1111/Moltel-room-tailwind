@@ -27,15 +27,31 @@ const CreatePost = ({ isEdit,setIsEdit }) => {
             address: dataEdit?.address || '',
             priceCode: dataEdit?.priceCode || '',
             areaCode: dataEdit?.areaCode || '',
-            description: isEdit ?  JSON.parse(dataEdit?.description) : '',
-            target: dataEdit?.description || 'Tất cả',
+            description:  isEdit ?  JSON.parse(dataEdit?.description) : '',
+            target: isEdit ? dataEdit?.overviews?.target : 'Tất cả',
             province: dataEdit?.province || '',
             label: dataEdit?.label || '',
         };
 
         return initData;
     });
+    const resetPayload = () => {
+        setPayload({
+            categoryCode: '',
+            title: '',
 
+            priceNumber: 0,
+            areaNumber: 0,
+            images: '',
+            address: '',
+            priceCode: '',
+            areaCode: '',
+            description: '',
+            target: '',
+            province: '',
+            label: '',
+        });
+    }
     let handleSubmit = async () => {
         let priceCodeArr = getCodes(+payload?.priceNumber / Math.pow(10, 6), prices, 1, 15);
         let areaCodeArr = getCodesArea(+payload?.areaNumber, areas, 20, 100);
@@ -65,21 +81,7 @@ const CreatePost = ({ isEdit,setIsEdit }) => {
                     dispatch(actions.resetPostsData())
                     setIsEdit(false)
                     Swal.fire('Thành công', 'Update succeed', 'success').then(() => {
-                        setPayload({
-                            categoryCode: '',
-                            title: '',
-
-                            priceNumber: 0,
-                            areaNumber: 0,
-                            images: '',
-                            address: '',
-                            priceCode: '',
-                            areaCode: '',
-                            description: '',
-                            target: '',
-                            province: '',
-                            label: '',
-                        });
+                        resetPayload()
                     });
                 } else {
                     Swal.fire('Oops !', 'Có lỗi gì rồi đấy', 'error');
@@ -91,21 +93,7 @@ const CreatePost = ({ isEdit,setIsEdit }) => {
                     console.log('check res', response);
                     Swal.fire('Thành công', 'Đã thêm bài đăng mới', 'success');
 
-                    setPayload({
-                        categoryCode: '',
-                        title: '',
-
-                        priceNumber: 0,
-                        areaNumber: 0,
-                        images: '',
-                        address: '',
-                        priceCode: '',
-                        areaCode: '',
-                        description: '',
-                        target: '',
-                        province: '',
-                        label: '',
-                    });
+                    resetPayload()
                 } else if (response && response.data?.err !== 0) {
                     console.log('check res', response);
 

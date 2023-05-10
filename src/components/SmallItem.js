@@ -9,7 +9,7 @@ const SmallItem = ({title, price,image, createdAt}) => {
   return (
     <div className='w-full flex items-center gap-3 border-b border-gray-200 pb-2' >
         <img 
-            src={image[0]}
+            src={image ? image[0] : ''}
             alt=''
             className='w-[65px] h-[65px] object-cover rounded-md flex-none'
         />

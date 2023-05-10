@@ -5,6 +5,7 @@ import InputReadOnly from './InputReadOnly';
 import { InputFormV2 } from '.';
 import { menuObject } from '../utils/menuManage';
 const Overview = ({ payload, setPayload, setInvalidFields, invalidFields }) => {
+    const  {dataEdit} = useSelector((state) => state.post)
     const { categories } = useSelector((state) => state.app);
     const { currentData } = useSelector((state) => state.user);
 
@@ -40,7 +41,7 @@ const Overview = ({ payload, setPayload, setInvalidFields, invalidFields }) => {
                         id=""
                         cols={'30'}
                         rows={'10'}
-                onFocus={(e) => setInvalidFields([])}
+                    onFocus={(e) => setInvalidFields([])}
 
                     />
                             <small className='text-red-500 block w-full' >{`${invalidFields?.find(item => item.name === 'description')?.message || '' }`}</small>
@@ -68,7 +69,7 @@ const Overview = ({ payload, setPayload, setInvalidFields, invalidFields }) => {
                     invalidFields={invalidFields}
                 />
                 <SelectInput
-                    defaultValue={'Tất cả'}
+                    defaultValue={dataEdit?.overview?.target || 'Tất cả'}
                     options={menuObject}
                     label={'Đối tượng cho thuê'}
                     value={payload.target}

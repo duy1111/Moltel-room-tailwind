@@ -75,3 +75,35 @@ export const apiCreatePosts = (payload) => {
     }
   });
 };
+export const apiGetPostsLimitAdmin = (query) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "get",
+        url: `/api/v1/post/limit-admin`,
+        params:query
+        
+        
+      });
+      resolve(response);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+export const apiUpdatePost = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "put",
+        url: `/api/v1/post/update-post`,
+        data:data
+        
+        
+      });
+      resolve(response);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};

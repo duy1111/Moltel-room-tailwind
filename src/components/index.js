@@ -17,5 +17,6 @@ export { default as SelectInput } from "./SelectInput";
 export { default as InputReadOnly } from "./InputReadOnly";
 export { default as InputFormV2 } from "./inputFormV2";
 export { default as Loading } from "./Loading";
+export { default as UpdatePost } from "./UpdatePost";
 
 

@@ -30,7 +30,7 @@ const Item = ({ images, user, title, star, description, attributes, address, key
                         )}
 
                     <span className="bg-overplay30 text-white rounded-md absolute px-2 py-1 left-2 bottom-2 hover:bg-overplay70">
-                        {`${images.length} ảnh`}
+                        {`${images?.length} ảnh`}
                     </span>
                     <span
                         onMouseEnter={() => setIsHoverHeart(true)}

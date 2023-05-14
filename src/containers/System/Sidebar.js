@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { menuSidebar } from '../../utils/menuSidebar';
 import icons from '../../utils/icons';
 import { useDispatch } from 'react-redux';
+import { blobToBase64 } from '../../utils/common/toBase64';
 import * as actions from '../../store/actions';
 const { BiLogOut } = icons;
 const activeStyle =
@@ -17,7 +18,7 @@ const Sidebar = () => {
     return (
         <div className="w-[256px] flex-none  gap-4 ">
             <div className="flex items-center p-4  gap-4">
-                <img src={anonAvatar} alt="avatar" className="w-[40px] h-[40px] rounded-full object-cover " />
+                <img src={currentData?.avatar ?  blobToBase64(currentData?.avatar):anonAvatar} alt="avatar" className="w-[40px] h-[40px] rounded-full object-cover " />
                 <div className="flex flex-col justify-center">
                     <span className="font-semibold">{currentData?.name}</span>
                     <small>{currentData?.phone}</small>

@@ -94,3 +94,19 @@ input[type="range"]::-ms-thumb:active {
       transform: translateX(100px);
   }
 }
+button.slick-arrow::before{
+  font-size: 50px !important;
+  color: yellow !important;
+}
+.slick-next{
+  right:33px !important;
+  z-index: 9999 !important;
+  top: 45% !important;
+}
+.slick-prev{
+  left: 2px !important;
+  z-index: 9999 !important;
+  top: 45% !important;
+
+
+}

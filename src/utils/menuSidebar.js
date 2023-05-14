@@ -24,7 +24,7 @@ export const menuSidebar = [
         id:4,
         text:'Liên hệ',
         icon: <FiUser/>,
-        path:'/he-thong/lien-he',
+        path:'/lien-he',
     },
     
 ]

@@ -6,12 +6,13 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { AiOutlineFacebook } from 'react-icons/ai';
 import { AiFillGoogleCircle, AiFillCamera } from 'react-icons/ai';
-import { BsChevronRight, BsSearch, BsFillBookmarkStarFill, BsFillFileEarmarkPostFill } from 'react-icons/bs';
+import { BsChevronRight, BsSearch, BsFillBookmarkStarFill, BsFillFileEarmarkPostFill ,BsStopwatch,BsHash} from 'react-icons/bs';
 import { HiLocationMarker } from 'react-icons/hi';
 import { GiMoneyStack, GiFamilyHouse } from 'react-icons/gi';
 import { TbPlayerTrackNextFilled, TbPlayerTrackPrevFilled, TbPencilPlus } from 'react-icons/tb';
 import { GrLinkPrevious } from 'react-icons/gr';
 import { ImBin } from 'react-icons/im';
+import {GoLocation} from 'react-icons/go'
 
 const icons = {
     AiOutlineHeart,
@@ -39,6 +40,9 @@ const icons = {
     BiLogOut,
     AiFillCamera,
     ImBin,
+    GoLocation,
+    BsStopwatch,
+    BsHash
 };
 
 export default icons;

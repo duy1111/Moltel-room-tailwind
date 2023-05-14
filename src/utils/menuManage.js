@@ -18,7 +18,7 @@ export const menuManage = [
         id:3,
         text:'Thông tin tài khoản',
         icon: <FiUser/>,
-        path:'/he-thong/thong-tin-tai-khoan',
+        path:'/he-thong/sua-thong-tin-ca-nhan',
     }
 ]
 

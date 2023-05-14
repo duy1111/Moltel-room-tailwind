@@ -3,6 +3,7 @@ import React, { memo, useState } from 'react';
 import icons from '../utils/icons';
 import { formatVietnameseToString } from '../utils/common/formatVietnameseToString';
 import { useNavigate,Link } from 'react-router-dom';
+import { path } from '../utils/constant';
 let { AiFillStar, AiFillHeart, AiOutlineHeart, BsFillBookmarkStarFill } = icons;
 const indexs = [0, 1, 2, 3];
 const Item = ({ images, user, title, star, description, attributes, address, key,id }) => {
@@ -18,7 +19,7 @@ const Item = ({ images, user, title, star, description, attributes, address, key
 
     return (
         <div key={key} className="w-full flex items-start border-orange-700 border-t p-4 cursor-pointer">
-            <Link to={`chi-tiet/${formatVietnameseToString(title)}/${id}`} className="w-[42%] h-[240px] flex ">
+            <Link to={`/${path.DETAIL_POST}/${formatVietnameseToString(title?.replace('/',''))}/${id}`} className="w-[42%] h-[240px] flex ">
                 <div className="w-full flex gap-[2px] items-start flex-wrap relative">
                     {images?.length > 4 &&
                         images?.filter((item, index) =>
@@ -43,7 +44,7 @@ const Item = ({ images, user, title, star, description, attributes, address, key
             </Link>
             <div className="w-[58%] pl-2">
                 <div className="flex justify-between">
-                    <div className="w-full flex gap-1">
+                    <Link to={`/${path.DETAIL_POST}/${formatVietnameseToString(title?.replace('/',''))}/${id}`} className="w-full flex gap-1">
                         <span className=" text-red-600 font-medium">
                             
                             {handleStar(+star).length > 0 && handleStar(+star).map((star,number) => {
@@ -51,7 +52,7 @@ const Item = ({ images, user, title, star, description, attributes, address, key
                             }) }
                             {title}
                         </span>
-                    </div>
+                    </Link>
                     <div className="w-[10%] flex justify-end px-1">
                         <BsFillBookmarkStarFill size={24} color="orange" />
                     </div>

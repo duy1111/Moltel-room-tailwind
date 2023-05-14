@@ -22,7 +22,7 @@ const InputForm = ({
         <>
           <Icons className="absolute left-3 top-3 text-2xl" />
           <input
-            onFocus={() => setInvalidFields([])}
+            onFocus={() =>setInvalidFields && setInvalidFields([])}
             value={value}
             onChange={(e) =>
               setValue((prev) => ({ ...prev, [id]: e.target.value }))
@@ -36,8 +36,8 @@ const InputForm = ({
             className="absolute right-3 top-3 text-2xl"
             onClick={isShowPass}
           />
-          {invalidFields.length > 0 &&
-            invalidFields.some((i) => i.name === id) && (
+          {
+            invalidFields?.some((i) => i.name === id) && (
               <small className="text-red-500 italic">
                 {invalidFields.find((i) => i.name === id)?.message}
               </small>
@@ -47,7 +47,7 @@ const InputForm = ({
         <>
           <Icons className="absolute left-3 top-3 text-2xl" />
           <input
-            onFocus={() => setInvalidFields([])}
+            onFocus={() => setInvalidFields && setInvalidFields([])}
 
             value={value}
             onChange={(e) =>
@@ -58,10 +58,10 @@ const InputForm = ({
             className="outline-none bg-[#ffffff] w-full rounded-lg border border-gray-400 focus:border-black py-[13px] pr-[12px] pl-[43px]"
             placeholder={label}
           />
-          {invalidFields.length > 0 &&
-            invalidFields.some((i) => i.name === id) && (
+          {
+            invalidFields?.some((i) => i.name === id) && (
               <small className="text-red-500 italic">
-                {invalidFields.find((i) => i.name === id)?.message}
+                {invalidFields?.find((i) => i.name === id)?.message}
               </small>
             )}
         </>

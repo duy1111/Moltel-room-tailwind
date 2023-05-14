@@ -20,7 +20,9 @@ const Navigation = ({isAdmin}) => {
             return { ...item, active: false };
         });
         let TC = [{ code: 'home', value: 'Trang chủ', active: true }];
+        let Contact = {code: 'contact',value:'liên hệ', active:false}
         let newData = TC.concat(data);
+        newData.push(Contact)
         setCategory(newData)
         return newData;
        
@@ -52,6 +54,7 @@ const Navigation = ({isAdmin}) => {
                         </div>
                     );
                 })}
+                
             </div>
         </div>
     );

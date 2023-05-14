@@ -3,18 +3,54 @@ import Button from '../../components/Button';
 import { Contact, UpdatePost } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions';
+import { apiDeletePost } from '../../services/post';
+import Swal from 'sweetalert2';
 
 const ManagePost = () => {
     let dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false);
     const { postOfCurrent,dataEdit } = useSelector((state) => state.post);
-    
+    const [update, setUpdate] = useState(false)
+    const [posts, setPosts] = useState([])
     useEffect(() => {
         dataEdit && dispatch(actions.getPostsAdmin());
-    }, [dataEdit]);
+    }, [dataEdit,update]);
+    useEffect(() => {
+        setPosts(postOfCurrent)
+    },[postOfCurrent])
+    let handleDeletePost = async(postId) => {
+        let response = await apiDeletePost(postId)
+        if (response && response?.data?.err === 0) {
+            setUpdate(prev => !prev)
+            Swal.fire('Thành công', 'Xóa bài đăng thành công', 'success');
 
-    let handleDeletePost = (postId) => {
-        
+            
+        } else if (response && response?.data?.err !== 0) {
+            console.log('check res', response);
+
+            Swal.fire('Oops !', 'Có lỗi gì rồi đấy', 'error');
+        }
+    }
+    let handleFilterByStatus = (statusCode) => {
+        console.log('check status code', statusCode)
+        if(+statusCode === 0){
+            // active post
+            setPosts(postOfCurrent.filter((item) => checkStatus(item) === 'Hoạt động'))
+        }else if(+statusCode === 1){
+            //expire post
+            setPosts(postOfCurrent.filter((item) => checkStatus(item) === 'Hết hạn'))
+        }
+        else{
+            setPosts(postOfCurrent)
+        }
+    }
+    let checkStatus = (item) => {
+        let dataDay = item?.overviews?.expire?.split(' ')[3];
+        let dataExpire = dataDay.split('/');
+        let dayExpire = `${dataExpire[1]}/${dataExpire[0]}/${dataExpire[2]}`;
+        return new Date(dayExpire).getTime() > new Date().getTime()
+        ? 'Hoạt động'
+        : 'Hết hạn'
     }
     return (
         <div className="p-6">
@@ -24,8 +60,10 @@ const ManagePost = () => {
                     <select className="border outline-none border-gray-300 px-2" name="" id="">
                         <option>Lọc theo loại vip</option>
                     </select>
-                    <select className="border outline-none border-gray-300 px-2" name="" id="">
-                        <option>Lọc theo trạng thái</option>
+                    <select onChange={(e) => handleFilterByStatus(e.target.value)} className="border outline-none border-gray-300 px-2" name="" id="">
+                        <option >Lọc theo trạng thái</option>
+                        <option value={'0'} >Đang hoạt động</option>
+                        <option value={'1'} >Hết hạn</option>
                     </select>
                     <Button text={'Đăng tin mới'} bgColor={'bg-red-500'} textColor={'text-white'} />
                 </div>
@@ -65,12 +103,9 @@ const ManagePost = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {postOfCurrent && postOfCurrent?.length ? (
-                                            postOfCurrent?.map((item, index) => {
-                                                let dataDay = item?.overviews?.expire?.split(' ')[3];
-                                                let dataExpire = dataDay.split('/');
-                                                let dayExpire = `${dataExpire[1]}/${dataExpire[0]}/${dataExpire[2]}`;
-                                                console.log('dayExpire', dayExpire);
+                                        {posts && posts?.length ? (
+                                            posts?.map((item, index) => {
+                                                
                                                 return (
                                                     <tr className="border-b dark:border-neutral-500">
                                                         <td className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
@@ -96,9 +131,7 @@ const ManagePost = () => {
                                                             {item?.overviews?.expire}
                                                         </td>
                                                         <td className="whitespace-nowrap px-6 py-4 border-r dark:border-neutral-500">
-                                                            {new Date(dayExpire).getTime() > new Date().getTime()
-                                                                ? 'Hoạt động'
-                                                                : 'Hết hạn'}
+                                                            {checkStatus(item)}
                                                         </td>
                                                         <td className="whitespace-nowrap px-6 py-4 border-r dark:border-neutral-500">
                                                             <button

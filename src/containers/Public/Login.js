@@ -41,7 +41,7 @@ export default function Login({}) {
     }
     
 
-    //setShowModal(false)
+    setShowModal(false)
   };
 
   let handleHiddenModal = () => {

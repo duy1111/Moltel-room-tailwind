@@ -79,7 +79,6 @@ function Header() {
                                     <button
                                         className="cursor-pointer py-2 hover:text-red-500 flex items-center gap-2"
                                         onClick={() => {
-                                          console.log('hahaha')
                                           setIsShowMenu(false)
                                           dispatch(actions.logout())
                                       }}

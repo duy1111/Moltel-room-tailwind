@@ -16,6 +16,7 @@ const actionTypes = {
   RESET_EDIT_DATA:"RESET_EDIT_DATA",
   //USER
   GET_CURRENT:'GET_CURRENT',
+  GET_USER_LIMIT:'GET_USER_LIMIT'
 };
 
 export default actionTypes;

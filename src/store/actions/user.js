@@ -1,6 +1,6 @@
 import actionTypes from "./actionTypes";
 
-import { apiCurrentUser } from "../../services/user";
+import { apiCurrentUser,apiGetUserLimit } from "../../services/user";
 
 const getCurrentUser = () => async (dispatch) => {
     try {
@@ -32,7 +32,30 @@ const getCurrentUser = () => async (dispatch) => {
       });
     }
   };
-  
+  const getUserLimit = (query) => async (dispatch) => {
+    try {
+      let response = await apiGetUserLimit(query);
+      if (response?.data.err === 0) {
+        dispatch({
+          type: actionTypes.GET_USER_LIMIT,
+          data: response.data.data?.rows,
+          count:response.data.data?.count,
+          msg: response.data.msg,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.GET_USER_LIMIT,
+          data: [],
+          msg: response.data.msg,
+        });
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.GET_USER_LIMIT,
+        data: [],
+      });
+    }
+  }
   export{
-    getCurrentUser
+    getCurrentUser,getUserLimit
   }

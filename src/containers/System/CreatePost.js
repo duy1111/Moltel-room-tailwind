@@ -14,7 +14,6 @@ const CreatePost = ({ isEdit,setIsEdit }) => {
     const { prices, areas, categories, provinces } = useSelector((state) => state.app);
 
     const { dataEdit } = useSelector((state) => state.post);
-    console.log('sss', dataEdit);
     const [invalidFields, setInvalidFields] = useState([]);
     const [payload, setPayload] = useState(() => {
         const initData = {
@@ -90,12 +89,10 @@ const CreatePost = ({ isEdit,setIsEdit }) => {
                 let response = await apiCreatePosts(finalPayload);
 
                 if (response && response.data?.err === 0) {
-                    console.log('check res', response);
                     Swal.fire('Thành công', 'Đã thêm bài đăng mới', 'success');
 
                     resetPayload()
                 } else if (response && response.data?.err !== 0) {
-                    console.log('check res', response);
 
                     Swal.fire('Oops !', 'Có lỗi gì rồi đấy', 'error');
                 }
@@ -115,7 +112,6 @@ const CreatePost = ({ isEdit,setIsEdit }) => {
             formData.append('file', i);
             formData.append('upload_preset', process.env.REACT_APP_UPLOAD_ASSETS_NAME);
             let response = await apiUploadImages(formData);
-            console.log('chekc res', response);
             if (response.status === 200) {
                 images = [...images, response.data?.secure_url];
             }
@@ -137,7 +133,6 @@ const CreatePost = ({ isEdit,setIsEdit }) => {
             image: prev?.images?.filter((item) => item !== image),
         }));
     };
-    console.log('check payload', payload);
     return (
         <div className="px-6 ">
             <h1 className="text-3xl font-medium py-4 border-b border-gray-200">

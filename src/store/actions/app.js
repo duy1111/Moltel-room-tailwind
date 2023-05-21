@@ -58,7 +58,6 @@ const getPrices = () => async (dispatch) => {
 const getArea = () => async (dispatch) => {
   try {
     let response = await apiGetArea();
-    console.log(response)
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_AREA,

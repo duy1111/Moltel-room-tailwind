@@ -2,6 +2,9 @@ import actionTypes from "../actions/actionTypes";
 
 const initState = {
   currentData: {},
+  users:[],
+  count:'',
+
 };
 
 const userReducers = (state = initState, action) => {
@@ -11,7 +14,13 @@ const userReducers = (state = initState, action) => {
         ...state,
         currentData : action.data || {}
       }
+    case actionTypes.GET_USER_LIMIT:
+      return {
+        ...state,
+        users: action.data || [],
+        count: action.count || 0
 
+      }
     case actionTypes.LOGOUT:
       return {
         ...state,

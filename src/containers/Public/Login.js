@@ -40,7 +40,7 @@ export default function Login({}) {
       isRegister === true ? dispatch(actions.register(payload)) : dispatch(actions.login(payload))
     }
     
-
+    navigate('/')
     setShowModal(false)
   };
 
@@ -52,9 +52,7 @@ export default function Login({}) {
   useEffect(() => {
     setIsRegister(location.state?.flag);
   }, [location.state?.flag]);
-  useEffect(() => {
-    Swal.fire('Oops !',msg,'error')
-  },[msg,update])
+ 
   useEffect(() => {
     
     isLoggedIn.isLoggedIn === true && navigate('/')

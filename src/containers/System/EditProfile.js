@@ -13,7 +13,6 @@ const EditProfile = () => {
     const { currentData } = useSelector((state) => state.user);
     const [invalidFields, setInvalidFields] = useState([]);
 
-    console.log('cc', currentData);
     const [payload, setPayload] = useState({
         name: currentData?.name || '',
         avatar: currentData?.avatar ? blobToBase64(currentData?.avatar) : '',
@@ -24,23 +23,19 @@ const EditProfile = () => {
 
     let handleSubmit = async() => {
         let response = await apiUpdateUser(payload)
-        console.log('hh', response);
         
         if (response && response.data?.err === 0) {
             dispatch(actions.getCurrentUser())
-            console.log('check res', response);
             Swal.fire('Thành công', 'Đã update bài đăng', 'success');
 
            
         } else if (response && response.data?.err !== 0) {
-            console.log('check res', response);
 
             Swal.fire('Oops !', 'Có lỗi gì rồi đấy', 'error');
         }
     };
     let handleUploadFile = async (e) => {
         const imageBase64 = await fileToBase64(e.target.files[0])
-        console.log(imageBase64)
         setPayload(prev => ({
             ...prev,
             avatar:imageBase64

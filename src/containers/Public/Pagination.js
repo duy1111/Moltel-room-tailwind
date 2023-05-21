@@ -5,14 +5,13 @@ import icons from '../../utils/icons'
 import { useSearchParams } from 'react-router-dom';
 
 let {TbPlayerTrackNextFilled,TbPlayerTrackPrevFilled} = icons
-const Pagination = ({}) => {
-    const {count} = useSelector(state => state.post)
+const Pagination = ({count}) => {
     const [arrPage, setArrPage] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [isHideEnd,setIsHideEnd] = useState(false)
     const [isHideStart,setIsHideStart] = useState(false)
     const [params] = useSearchParams();
-    const { posts } = useSelector((state) => state.post);
+    
     useEffect(() => {
         let page = params.get('page')
         page && +page !== currentPage && setCurrentPage(+page)
@@ -20,8 +19,6 @@ const Pagination = ({}) => {
     },[params])
     useEffect(() => {
         let maxPage = Math.ceil(count/process.env.REACT_APP_LIMIT);
-        console.log('check maxPage')
-        console.log('check currentPage')
         let start,end;
         if(+currentPage === 1){
             start = 1

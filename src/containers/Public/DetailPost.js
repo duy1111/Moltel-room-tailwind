@@ -10,7 +10,6 @@ const DetailPost = () => {
     let dispatch = useDispatch();
     let { GoLocation, GiMoneyStack, BiArea, BsStopwatch, BsHash } = icons;
     let { posts } = useSelector((state) => state.post);
-    console.log(posts);
     useEffect(() => {
         postId && dispatch(actions.getPostsLimit({ id: postId }));
     }, [postId]);

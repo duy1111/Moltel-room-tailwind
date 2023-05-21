@@ -20,8 +20,6 @@ const Intro = () => {
     //     return arr;
     // }
     const { categories } = useSelector((state) => state.app);
-    console.log(categories);
-    // console.log(renderCategories(categories));
     return (
         <div className="border flex flex-col items-center justify-center gap-3  w-[1200px] shadow-md bg-white rounded-lg p-4">
             <h3 className="font-semibold text-lg ">{text.title}</h3>

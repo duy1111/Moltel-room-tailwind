@@ -10,7 +10,7 @@ import { BsChevronRight, BsSearch, BsFillBookmarkStarFill, BsFillFileEarmarkPost
 import { HiLocationMarker } from 'react-icons/hi';
 import { GiMoneyStack, GiFamilyHouse } from 'react-icons/gi';
 import { TbPlayerTrackNextFilled, TbPlayerTrackPrevFilled, TbPencilPlus } from 'react-icons/tb';
-import { GrLinkPrevious } from 'react-icons/gr';
+import { GrLinkPrevious,GrUserManager } from 'react-icons/gr';
 import { ImBin } from 'react-icons/im';
 import {GoLocation} from 'react-icons/go'
 
@@ -42,7 +42,8 @@ const icons = {
     ImBin,
     GoLocation,
     BsStopwatch,
-    BsHash
+    BsHash,GrUserManager
+    
 };
 
 export default icons;

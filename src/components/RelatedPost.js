@@ -12,7 +12,6 @@ const RelatedPost = () => {
         dispatch(actions.getNewPost())
     
     },[])
-    console.log(newPost);
     return (
         <div className="w-full bg-white rounded-md shadow-md p-4 border flex flex-col items-center justify-center">
             <h3 className="text-lg font-semibold mb-4">Tin mới đăng</h3>

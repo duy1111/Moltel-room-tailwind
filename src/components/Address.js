@@ -10,7 +10,6 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
     const [province, setProvince] = useState([]);
     const [district, setDistrict] = useState([]);
     const [reset, setReset] = useState(false);
-    console.log('check state', province);
     useEffect(() => {
         let addressArr = dataEdit?.address?.split(',') || [];
         if (addressArr) {
@@ -34,7 +33,6 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
     }, []);
     useEffect(() => {
         let addressArr = dataEdit?.address?.split(',') || [];
-        console.log(addressArr);
         if (addressArr) {
             let foundProvince =
                 provinces?.length > 0 &&

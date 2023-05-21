@@ -15,6 +15,7 @@ export const path = {
   MANAGE_POST:'quan-ly-bai-dang',
   EDIT_PROFILE:'sua-thong-tin-ca-nhan',
   CONTACT:'lien-he',
+  MANAGE_USER:'quan-ly-nguoi-dung',
 
 };
 export const text = {

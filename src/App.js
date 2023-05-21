@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Login,Rental,HomePage,DetailPost,SearchDetail,Contact } from "./containers/Public";
 import { path } from "./utils/constant";
-import { CreatePost, EditProfile, ManagePost, System } from "./containers/System";
+import { CreatePost, EditProfile, ManagePost, System,ManageUser } from "./containers/System";
 import { useEffect } from "react";
 import { useDispatch,useSelector } from 'react-redux';
 import * as actions from './store/actions';
@@ -44,6 +44,9 @@ useEffect(() => {
 
           <Route path={path.MANAGE_POST} element={<ManagePost/>} /> 
           <Route path={path.EDIT_PROFILE} element={<EditProfile/>} /> 
+          <Route path={path.EDIT_PROFILE} element={<EditProfile/>} />
+          <Route path={path.MANAGE_USER} element={<ManageUser/>} /> 
+
           
         </Route>
       </Routes>

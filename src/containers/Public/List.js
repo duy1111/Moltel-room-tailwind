@@ -50,7 +50,7 @@ const List = ({categoryCode}) => {
                 {posts?.length > 0 &&
                     posts.map((item,index) => {
                         return <Item 
-                          key={item?.id} 
+                          key={index} 
                           address={item?.address}
                           attributes={item?.attributes}
                           description={JSON.parse(item?.description)}

@@ -9,6 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 import anonAvatar from '../../assets/anon-avatar.jpg'
 import { apiDeleteUser } from '../../services/user';
 import { blobToBase64 } from '../../utils/common/toBase64';
+import UpdateUser from './EditUser';
 import Loading from '../../components';
 const ManagePost = () => {
     let dispatch = useDispatch();
@@ -16,9 +17,9 @@ const ManagePost = () => {
     let [searchParams] = useSearchParams()
 
     const { users,count } = useSelector((state) => state.user);
- 
+    const [isEdit, setIsEdit] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    
+    const [dataUser, setDataUser] = useState({})
     useEffect(() => {
         dispatch(actions.getUserLimit())
     },[])
@@ -64,6 +65,11 @@ const ManagePost = () => {
     }
     let handleLoading = () => {
         setIsLoading(prev => !prev)
+    }
+    let handleEditUser = (item) => {
+        console.log(isEdit)
+        setDataUser(item)
+        
     }
     
     
@@ -133,7 +139,11 @@ const ManagePost = () => {
                                                         
                                                         <td className="whitespace-nowrap px-6 py-4 border-r dark:border-neutral-500">
                                                             <button
-                                                                
+                                                                // onClick={() => handleUpdateUser(item)}
+                                                                onClick={() => {
+                                                                    setIsEdit(true)
+                                                                    handleEditUser(item)
+                                                                } }
                                                                 className="outline-none mr-2"
                                                             >
                                                                 Sửa
@@ -160,6 +170,7 @@ const ManagePost = () => {
                         </div>
                     </div>
                     <Contact />
+                    {isEdit && <UpdateUser setIsEdit={setIsEdit} dataUser={dataUser} />}
                 </div>
             </div>
 

@@ -134,7 +134,7 @@ const ManagePost = () => {
                                                         <td className="whitespace-nowrap px-6 py-4 border-r dark:border-neutral-500">
                                                             <button
                                                                 onClick={() => {
-                                                                    console.log('check item ne',item)
+                                                                    
                                                                     setIsEdit(true);
                                                                     dispatch(actions.getPostsData(item))
                                                                 }}

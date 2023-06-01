@@ -62,4 +62,19 @@ export const apiCurrentUser = () => {
     });
   };
   
+  export const apiUpdateUserWithAdmin = (payload) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axios({
+          method: "put",
+          url: "/api/v1/user/update-user-admin",
+          data:payload
+          
+        });
+        resolve(response);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
   

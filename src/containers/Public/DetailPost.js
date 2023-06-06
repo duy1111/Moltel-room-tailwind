@@ -55,10 +55,9 @@ const DetailPost = () => {
                 <div className="mt-8">
                     <h3 className="font-semibold text-xl my-4">Thông tin mô tả</h3>
                     <div className="flex flex-col gap-2">
-                        {posts[0]?.description &&
-                            JSON.parse(posts[0]?.description)?.map((item, index) => {
-                                return <span key={index}>{item}</span>;
-                            })}
+                        <span>{posts[0]?.description &&
+                            JSON.parse(posts[0]?.description)}</span>
+                        
                     </div>
                     <div className="mt-8">
                         <h3 className="font-semibold text-xl my-4">Đặc điểm tin đăng</h3>
@@ -108,7 +107,7 @@ const DetailPost = () => {
                                     <td className=" p-4">{posts[0]?.user?.phone}</td>
                                 </tr>
                                 <tr>
-                                    <td className=" p-4">zalo</td>?<td className=" p-4">{posts[0]?.user?.zalo ? posts[0]?.user?.zalo : ''}</td>
+                                    <td className=" p-4">zalo</td><td className=" p-4">{posts[0]?.user?.zalo ? posts[0]?.user?.zalo : ''}</td>
                                 </tr>
                             </tbody>
                         </table>

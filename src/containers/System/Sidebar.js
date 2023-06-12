@@ -30,6 +30,7 @@ const Sidebar = () => {
     
 
     return (
+
         <div className="w-[256px] flex-none  gap-4 ">
             <div className="flex items-center p-4  gap-4">
                 <img src={currentData?.avatar ?  blobToBase64(currentData?.avatar):anonAvatar} alt="avatar" className="w-[40px] h-[40px] rounded-full object-cover " />
@@ -50,13 +51,16 @@ const Sidebar = () => {
                         </NavLink>
                     );
                 })}
-                <NavLink
-                            className={({ isActive }) => (isActive ? activeStyle : notActiveStyle)}
-                            to={menuManageUser?.path}
-                            key={menuManageUser.id}
-                        >
-                            {menuManageUser.icon} {menuManageUser.text}
-                        </NavLink>
+                {currentData && currentData?.role === 'admin' && (
+                    <NavLink
+                    className={({ isActive }) => (isActive ? activeStyle : notActiveStyle)}
+                    to={menuManageUser?.path}
+                    key={menuManageUser.id}
+                >
+                    {menuManageUser.icon} {menuManageUser.text}
+                </NavLink>
+                )}
+                
                 <span
                     onClick={() => {
                         dispatch(actions.logout());

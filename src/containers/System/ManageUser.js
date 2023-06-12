@@ -45,11 +45,11 @@ const ManagePost = () => {
         dispatch(actions.getUserLimit(searchParamsObject))
       
         
-    }, [searchParams]);
+    }, [searchParams,dataUser,isEdit]);
     const [allUser, setAllUser] = useState([])
     useEffect(()=> {
         setAllUser(users)
-    },[users])
+    },[users,isEdit])
     let handleDeleteUser = async(id) => {
         console.log(id)
         let response = await apiDeleteUser(id)
@@ -67,7 +67,7 @@ const ManagePost = () => {
         setIsLoading(prev => !prev)
     }
     let handleEditUser = (item) => {
-        console.log(isEdit)
+        console.log('check editne',isEdit)
         setDataUser(item)
         
     }
